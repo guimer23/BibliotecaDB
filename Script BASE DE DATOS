@@ -1,0 +1,76 @@
+--Crear Base de Datos
+CREATE DATABASE db_galeria
+GO
+
+USE db_galeria
+GO
+
+--Crear Tabla Categoria
+CREATE TABLE categoria
+(
+	id_cat int NOT NULL identity PRIMARY KEY, 
+	nom_cat varchar(250) NOT NULL,	
+	des_cat text NULL,
+	est_cat varchar(10)NOT NULL
+)
+GO
+
+--Crear Tabla Galeria
+CREATE TABLE galeria
+(
+	id_gal int NOT NULL identity PRIMARY KEY,
+	id_cat int NOT NULL,	
+	nom_gal varchar(250) NOT NULL,	
+	des_gal text NULL,
+	img_gal varchar(250) NOT NULL,
+	thum_gal varchar(250) NOT NULL,	
+	est_gal varchar(10),
+	FOREIGN KEY (id_cat) REFERENCES categoria(id_cat)
+)
+GO
+
+--Crear Tabla Documento
+CREATE TABLE documento
+(
+	id_doc int NOT NULL identity PRIMARY KEY,
+	id_cat int NOT NULL,	
+	nom_doc varchar(250) NOT NULL,	
+	des_doc text NULL,
+	ext_doc varchar(4) NOT NULL,
+	tam_doc varchar(20) NOT NULL,
+	tip_doc varchar(250) NOT NULL,
+	est_doc varchar(10),
+	FOREIGN KEY (id_cat) REFERENCES categoria(id_cat)
+)
+GO
+
+--Crear Tabla Persona
+CREATE TABLE persona
+(
+	cod_per varchar(10) NOT NULL PRIMARY KEY,
+	dni_per varchar(8) NOT NULL,
+	nom_per varchar(250) NOT NULL,
+	ape_per varchar(250) NOT NULL,
+	sex_per char(1) NOT NULL,
+	cel_per varchar(15) NULL,
+	mail_per varchar(250) NULL,
+	dir_per varchar(250) NULL,		
+	fot_per varchar(250) NULL,
+	est_per char(10) NULL	
+)
+GO
+
+--Crear Tabla Usuario
+CREATE TABLE usuario
+(
+	id_usu int NOT NULL identity PRIMARY KEY,
+	cod_per varchar(10) NOT NULL,
+	nom_usu varchar(50) NOT NULL,
+	pas_usu varchar(80) NOT NULL,
+	niv_usu varchar(30) NOT NULL,
+	est_usu varchar(10) NOT NULL,
+	FOREIGN KEY (cod_per) REFERENCES persona(cod_per)
+)
+GO
+
+
